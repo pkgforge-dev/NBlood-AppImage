@@ -6,29 +6,20 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm \
-    glu      \
-    libdecor \
-    libvpx   \
-    sdl2
+pacman -Syu --noconfirm glu libvpx sdl2-compat
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano gtk2-mini libdecor-mini
 
-# Comment this out if you need an AUR package
-make-aur-package gtk2
-
-# If the application needs to be manually built that has to be done down here
-echo "Making nightly build of NBlood..."
+echo "Building NBlood..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/NBlood/NBlood"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-git clone "$REPO" ./NBlood
+git clone --depth 1 "$REPO" ./NBlood
 echo "$VERSION" > ~/version
 
+mkdir -p ./AppDir/bin
 cd ./NBlood
 make blood -j$(nproc)
-mv -v nblood /usr/bin
-mkdir -p /usr/share/games/nblood
-mv -v nblood.pk3 /usr/share/games/nblood
+mv -v nblood nblood.pk3 ../AppDir/bin

@@ -16,11 +16,7 @@ echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano gtk2-mini
 
-# Comment this out if you need an AUR package
-#make-aur-package PACKAGENAME
-
-# If the application needs to be manually built that has to be done down here
-echo "Making nightly build of NBlood..."
+echo "Building NBlood..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/NBlood/NBlood"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"

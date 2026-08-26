@@ -22,8 +22,7 @@ VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
 git clone "$REPO" ./NBlood
 echo "$VERSION" > ~/version
 
+mkdir -p ./AppDir/bin
 cd ./NBlood
 make blood -j$(nproc)
-mv -v nblood /usr/bin
-mkdir -p /usr/share/games/nblood
-mv -v nblood.pk3 /usr/share/games/nblood
+mv -v nblood nblood.pk3 ../AppDir/bin

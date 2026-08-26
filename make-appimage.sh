@@ -10,7 +10,7 @@ export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}
 export DEPLOY_OPENGL=1
 
 # Deploy dependencies
-quick-sharun /usr/bin/nblood
+quick-sharun ./AppDir/bin/nblood
 
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
